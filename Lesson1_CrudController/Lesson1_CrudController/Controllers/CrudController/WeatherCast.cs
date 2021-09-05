@@ -7,7 +7,7 @@ namespace Lesson1_CrudController.Controllers.CrudController
 {
     public class WeatherCast
     {
-        public int temoerature;
+        public int temperature;
         public DateTimeOffset dateTime;
     }
 }
