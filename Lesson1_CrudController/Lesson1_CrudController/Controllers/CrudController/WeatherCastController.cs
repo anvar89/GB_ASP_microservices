@@ -12,7 +12,7 @@ namespace Lesson1_CrudController.Controllers.CrudController
     [ApiController]
     public class WeatherCastController : ControllerBase
     {
-        private ValuesHolder _holder;
+        private readonly ValuesHolder _holder;
 
         public WeatherCastController(ValuesHolder holder)
         {
@@ -26,10 +26,11 @@ namespace Lesson1_CrudController.Controllers.CrudController
         /// <param name="dateTime"></param>
         /// <param name="temperature"></param>
         [HttpPost]
-        public IActionResult Create([FromBody] DateTimeOffset dateTime, [FromBody] int temperature)
+        [Consumes("application/json")]
+        public IActionResult Create([FromBody] WeatherCast cast)
         {
-            _holder.Values.Add(new WeatherCast { dateTime = dateTime, temperature = temperature });
-            return Ok();
+            _holder.Values.Add(new WeatherCast { dateTime = cast.dateTime, temperature = cast.temperature });
+            return Ok(_holder.Values);
 
         }
 
@@ -40,7 +41,7 @@ namespace Lesson1_CrudController.Controllers.CrudController
         /// <param name="newTemperature"></param>
         // PUT api/<WeatherCastController>/5
         [HttpPut("{dateTime}")]
-        public IActionResult Update(DateTimeOffset dateTime, [FromBody] int newTemperature)
+        public IActionResult Update(DateTime dateTime, [FromBody] int newTemperature)
         {
             for (int i = 0; i < _holder.Values.Count; i++)
             {
@@ -60,7 +61,7 @@ namespace Lesson1_CrudController.Controllers.CrudController
         /// <param name="to"></param>
         /// <returns></returns>
         [HttpDelete("{from}/{to}")]
-        public IActionResult Delete(DateTimeOffset from, DateTimeOffset to)
+        public IActionResult Delete(DateTime from, DateTime to)
         {
             _holder.Values = _holder.Values.Where(x => x.dateTime < from && x.dateTime > to).ToList();
             return Ok();
@@ -74,13 +75,17 @@ namespace Lesson1_CrudController.Controllers.CrudController
         /// <param name="to"></param>
         /// <returns></returns>
         [HttpGet("{from}/{to}")]
-        public IActionResult Read(DateTimeOffset from, DateTimeOffset to)
+        public IActionResult Read(DateTime from, DateTime to)
         {
             var result = _holder.Values.Where(x => x.dateTime > from && x.dateTime < to);
             return Ok(result);
         }
 
-
+        [HttpGet]
+        public IActionResult ReadAll()
+        {
+            return Ok(_holder.Values);
+        }
 
 
 

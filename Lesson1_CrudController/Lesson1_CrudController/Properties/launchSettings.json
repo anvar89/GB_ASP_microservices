@@ -1,6 +1,7 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
+    "Content-Type": "application/json",
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {

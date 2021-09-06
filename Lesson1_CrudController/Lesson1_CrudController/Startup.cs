@@ -26,7 +26,7 @@ namespace Lesson1_CrudController
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(x => x.AllowEmptyInputInBodyModelBinding = true);
             services.AddSingleton<ValuesHolder>();
         }
 
