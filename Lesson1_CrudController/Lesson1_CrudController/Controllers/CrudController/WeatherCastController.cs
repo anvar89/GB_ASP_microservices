@@ -19,18 +19,16 @@ namespace Lesson1_CrudController.Controllers.CrudController
             _holder = holder;
         }
 
-        // POST api/<WeatherCastController>
         /// <summary>
         /// Осуществляет сохранение пары значение-время
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="temperature"></param>
         [HttpPost]
-        [Consumes("application/json")]
         public IActionResult Create([FromBody] WeatherCast cast)
         {
-            _holder.Values.Add(new WeatherCast { dateTime = cast.dateTime, temperature = cast.temperature });
-            return Ok(_holder.Values);
+            _holder.Values.Add(cast);
+            return Ok();
 
         }
 
@@ -45,9 +43,9 @@ namespace Lesson1_CrudController.Controllers.CrudController
         {
             for (int i = 0; i < _holder.Values.Count; i++)
             {
-                if (_holder.Values[i].dateTime == dateTime)
+                if (_holder.Values[i].DateTimeOfMeas == dateTime)
                 {
-                    _holder.Values[i].temperature = newTemperature;
+                    _holder.Values[i].Temperature = newTemperature;
                 }
             }
             return Ok();
@@ -63,7 +61,7 @@ namespace Lesson1_CrudController.Controllers.CrudController
         [HttpDelete("{from}/{to}")]
         public IActionResult Delete(DateTime from, DateTime to)
         {
-            _holder.Values = _holder.Values.Where(x => x.dateTime < from && x.dateTime > to).ToList();
+            _holder.Values = _holder.Values.Where(x => x.DateTimeOfMeas < from && x.DateTimeOfMeas > to).ToList();
             return Ok();
         }
 
@@ -77,7 +75,7 @@ namespace Lesson1_CrudController.Controllers.CrudController
         [HttpGet("{from}/{to}")]
         public IActionResult Read(DateTime from, DateTime to)
         {
-            var result = _holder.Values.Where(x => x.dateTime > from && x.dateTime < to);
+            var result = _holder.Values.Where(x => x.DateTimeOfMeas > from && x.DateTimeOfMeas < to);
             return Ok(result);
         }
 

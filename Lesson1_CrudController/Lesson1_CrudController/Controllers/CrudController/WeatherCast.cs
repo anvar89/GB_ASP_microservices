@@ -7,7 +7,7 @@ namespace Lesson1_CrudController.Controllers.CrudController
 {
     public class WeatherCast
     {
-        public int temperature;
-        public DateTime dateTime;
+        public int Temperature { set; get; }
+        public DateTime DateTimeOfMeas { set; get; }
     }
 }
