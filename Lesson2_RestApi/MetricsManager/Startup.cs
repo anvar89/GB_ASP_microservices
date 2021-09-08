@@ -1,4 +1,3 @@
-using Lesson1_CrudController.Controllers.CrudController;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lesson1_CrudController
+namespace MetricsManager
 {
     public class Startup
     {
@@ -27,7 +26,6 @@ namespace Lesson1_CrudController
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<ValuesHolder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

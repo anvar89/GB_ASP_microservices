@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lesson1_CrudController
+namespace MetricsManager
 {
     public class Program
     {
